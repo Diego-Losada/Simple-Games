@@ -10,7 +10,9 @@ public class Hangman {
 
     public static void main(String[] args) {
         Hangman hangman = new Hangman();
-        hangman.setPhrase("Mission'   IMPOSSIBLE");
+        hangman.setPhrase("Mission' IMPOSSIBLE");
+        hangman.guess('S');
+        System.out.println(hangman.toString());
     }
     public enum Result { LOSE, WIN, NONE };
     
@@ -78,7 +80,6 @@ public class Hangman {
                 }
             }
         }
-        for(int i =0; i < phrase.length()
         
         System.out.println(this.phrase);
     }
@@ -128,7 +129,7 @@ public class Hangman {
         }
         if (count == 0) {
             misses = misses + 1;
-        } if (count > 0) {
+        } else if (count > 0) {
             guess.add(c);
         }
         return count;
@@ -183,7 +184,26 @@ public class Hangman {
      * 
      */
     public String toString() {
-      return "";
+        String puzzle = phrase;
+        Boolean change = true;
+        for(int i =0; i<puzzle.length(); i++) {
+            if(Character.isLetter(puzzle.charAt(i))) {
+            }
+            for(int j=0; j<guess.size(); j++) {
+                if (phrase.charAt(i) == guess.get(j)) {
+                    change = false;
+                }
+            }
+            if (change) {
+                if (Character.isLetter(puzzle.charAt(i))) {
+                    puzzle = puzzle.replace(puzzle.charAt(i), '-');
+                }
+            }
+            change = true;
+        }
+        System.out.println(guess.toString());
+        String c = "[";
+      return c+ puzzle + "]"+ "  "+ guess.toString() + "  "+  "["+ Integer.toString(misses)+ "]";
     }
     
 }
